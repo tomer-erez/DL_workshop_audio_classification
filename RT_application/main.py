@@ -3,16 +3,14 @@ import numpy as np
 from PIL import Image
 import io
 from tensorflow.keras.models import load_model
+from utils.preprocessing import predict_wrapper
+
 
 
 # load the deep learning model from model.h5
-audio_model = load_model('model.h5')
+audio_model = load_model('resources/my_model.h5')
 # predict a warm up call on warm_up.wav
-warm_up = audio_model.predict('warm_up.wav')
-
-
-# For this example, let's assume you have a model named 'model' imported from somewhere
-
+warm_up = predict_wrapper(audio_model,'resources/warm_up.wav')
 
 
 
@@ -27,7 +25,7 @@ def classify(file):
     img_array = np.array(img)
     # Perform inference with your neural network model
     # Example: Call the predict function of your model
-    prediction = model.predict(img_array)
+    prediction = audio_model.predict(img_array)
     # Example: Return the prediction result
     return prediction
 
